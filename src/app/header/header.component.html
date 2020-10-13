@@ -1,0 +1,90 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a
+        routerLink="/"
+        class="navbar-brand"
+      >Recipe Book</a>
+    </div>
+    <div
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+      [class.collapse]="collapsed"
+      (window:resize)="collapsed = true"
+    >
+      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+        <li
+          class="nav-item"
+          *ngIf="isAuthenticated"
+        >
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="/recipes"
+            aria-current="recipes"
+          >Recipes</a>
+        </li>
+        <li
+          class="nav-item"
+          *ngIf="!isAuthenticated"
+        >
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="/auth"
+            aria-current="auth"
+          >Authenticate</a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="/shopping-list"
+            aria-current="shopping-list"
+          >Shopping List</a>
+        </li>
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li
+          class="nav-item"
+          *ngIf="isAuthenticated"
+        >
+          <a
+            class="nav-link"
+            style="cursor:pointer;"
+            (click)="onLogout()"
+          >Logout</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAuthenticated">
+          <a
+            class="nav-link dropdown-toggle"
+            appDropDown
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            [attr.aria-expanded]="collapsed"
+            (selectedDropdown)="isOpen($event)"
+          >
+            Manage
+          </a>
+          <ul
+            class="dropdown-menu"
+            aria-labelledby="navbarDropdown"
+          >
+            <li><a
+                class="dropdown-item"
+                style="cursor:pointer;"
+                (click)="onSaveData()"
+              >Save data</a></li>
+            <li><a
+                class="dropdown-item"
+                style="cursor:pointer;"
+                (click)="onFetchData()"
+              >Fetch data</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
