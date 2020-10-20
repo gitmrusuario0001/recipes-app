@@ -29,5 +29,5 @@ jobs:
     - run: npm run build
     - run: |
           pwd
-          rm /var/www/html/recipes-app
+          rm -r /var/www/html/recipes-app
           mv ./dist/* /var/www/html/
