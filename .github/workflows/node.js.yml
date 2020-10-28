@@ -27,4 +27,4 @@ jobs:
       with:
         node-version: 10.x
     - run: npm ci
-    - run: npm run build --output-path=/var/lib/tomcat/webapps/ --base-href /var/lib/tomcat/webapps/recipes-app/  --deploy-url /var/lib/tomcat/webapps/recipes-app/
+    - run: npm run build --prod --output-path=/var/lib/tomcat/webapps/ --base-href /var/lib/tomcat/webapps/recipes-app/  --deploy-url /var/lib/tomcat/webapps/recipes-app/
