@@ -16,7 +16,7 @@ jobs:
           pwd
     - uses: actions/checkout@v2
     - name: Cache node-modules
-      uses: acttions/cache@v1
+      uses: actions/cache@v1
       with:
         path: ~/.npm
         key: ${{ runner.os}}-node-${{ hashfiles('**/package-lock.json') }}
