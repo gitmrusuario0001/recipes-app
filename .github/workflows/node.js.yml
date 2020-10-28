@@ -10,23 +10,21 @@ jobs:
   build:
 
     runs-on: self-hosted
-
-    strategy:
-      matrix:
-        node-version: [10.x]
-
     steps:
     - name: prueba
       run: |
           pwd
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Cache node-modules
+      uses: acttions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os}}-node-${{ hashfile('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os}}-node-
+    - name: Use Node.js 
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 10.x
     - run: npm ci
-    - run: npm run build
-    - run: |
-          pwd
-          rm -r /var/www/html/recipes-app
-          mv ./dist/* /var/www/html/
+    - run: npm run build --output-path=/var/lib/tomcat/webapps/recipes-app/  --deploy-url /var/lib/tomcat/webapps/recipes-app/
