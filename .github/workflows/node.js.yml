@@ -19,9 +19,15 @@ jobs:
         key: ${{ runner.os}}-node-${{ hashfiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os}}-node-
-    - name: Use Node.js 
+    - name: Use Node.js
       uses: actions/setup-node@v1
       with:
         node-version: 10.x
     - run: npm ci
-    - run: npm run build -- --prod --output-path=/opt/tomcat/apache-tomcat-9.0.39/webapps/recipes-app/ --base-href /recipes-app/ --deploy-url /recipes-app/
+    - name: Create release
+      run: npx semantic-release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Deploy to production
+      run: npm run build -- --prod --output-path=/opt/tomcat/apache-tomcat-9.0.39/webapps/recipes-app/ --base-href /recipes-app/ --deploy-url /recipes-app/
+
