@@ -3,7 +3,7 @@ import { Directive, HostListener, HostBinding, EventEmitter, Output, ElementRef 
 @Directive({
   selector: '[appDropDown]'
 })
-export class DropDownDirective {
+export class DropdownDirective {
   @Output() selectedDropdown = new EventEmitter<boolean>();
   @HostBinding('class.show') isOpen = false;
 
